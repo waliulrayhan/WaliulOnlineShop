@@ -1,0 +1,32 @@
+﻿﻿@using WaliulOnlineShop.Models;
+@*@using X.PagedList.Mvc.Common*@
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Products>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-4">
+                <div class="card">
+                    <img class="card-img-top" src="~/@product.Image" alt="Card image cap" style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <label style="font-size: 20px;color: #ef4a23"><b>Price : @product.Price</b></label>
+                    </div>
+                    <div class="card-footer card text-center">
+                        <a asp-action="Detail" asp-controller="Home" asp-route-id="@product.Id" class="btn btn-success pull-right btn-outline-info">See More Deatils</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.PagedListPager(Model,c=>Href("~/User/Home/Index?page="+c),X.PagedList.Web.Common.PagedListRenderOptions.MinimalWithPageCountText)
+</div>
